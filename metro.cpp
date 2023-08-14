@@ -20,61 +20,7 @@ vector< pair<ll,ll> > v[100010];//Adjacency matrix
 ll N;// N is no of vertices M is edges
 string station[200];
 map <string,string> tourm;
-void recharge()
-{
-	fstream f;
-	ll amt,ini,cid,fin,x;
-	ll c_id,amount;
-	f.open("paisa.txt",ios::in|ios::out);
-	if(!f)
-		cout<<"Not Found\n"<<endl;
-	f.seekg(0);
-	cout<<endl;
-	cout<<"Enter Card Id\n";
-	cin>>c_id;
-	cout<<"Enter Amount\n";
-	cin>>amount;
-	f.clear();
-	while(!f.eof())
-	{
-		ini=f.tellg();
-		f.ignore();
-		f>>cid;
-		f>>amt;
-		fin=f.tellg();
-		if(cid==c_id)
-		{
-			x=amt+amount;
-			f.seekg(ini);
-			f<<endl<<cid<<endl<<x;
-			cout<<"Recharge Details\n";
-			cout<<"\nCard Id: "<<cid<<endl;
-			cout<<"Initial Balance: "<<amt<<endl;
-			cout<<"Recharge Amount: "<<amount<<endl;
-			cout<<"Total Balance: "<<x<<endl;
-			break;
-		}
-	}
-	f.close();
-}
-void gettour()
-{
-	ifstream fin;
-	string s1,s2;
-	fin.open("tourplace.txt",ios::in);
-	if(!fin)
-		cout<<"Not Found\n";
-	fin.seekg(0);
-	fin.clear();
-	while(!fin.eof())
-	{
-		getline(fin,s1);
-		getline(fin,s2);
-		tourm[s1]=s2;
-	//	cout<<tourm[s1]<<endl;
-	}
-	fin.close();
-}
+
 //Given below code will print the path
 void disp(ll src,ll dest,ll par[])
 {
@@ -262,8 +208,7 @@ int main()
 	{
 		cout<<endl;
 		cout<<"1.To Route between two stations\n";
-		cout<<"2.To check nearest metro station to a tourist place\n";
-		cout<<"3.To Recharge your Smart Card\n";
+		
 		cin>>dec;
 		switch(dec)
 		{
@@ -272,7 +217,6 @@ int main()
 					{
 						consgraph();//To build the adjacency matrix
 						cout<<"Enter station 1\n";
-						getline(cin,source);
 						getline(cin,source);
 						//cout<<source<<endl;
 						cout<<"Enter station 2\n";
@@ -294,28 +238,7 @@ int main()
 						cin>>ch;
 					}while(ch=='Y'||ch=='y');	
 					break;	
-			case 2:
-					do
-					{
-						string place;
-						cout<<"Enter a place\n";
-						getline(cin,place);
-						getline(cin,place);
-						string st;
-						st=tourm[place];
-						cout<<st<<endl;
-						cout<<"Do you wish to check for any other place\n";
-						cin>>ch;
-					}while(ch=='Y'||ch=='y');
-					break;
-			case 3:
-					do
-					{
-						recharge();
-						cout<<"Do you wish to recharge some other smart card\n";
-						cin>>ch;
-					}while(ch=='Y'||ch=='y');
-					break;
+			
 		}
 		cout<<"Do you wish to go back to main menu\n";
 		cin>>ch;
