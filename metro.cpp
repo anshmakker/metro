@@ -202,7 +202,6 @@ int main()
 	string source,destination;
 	ll i,x,y,w,src,dest,k,choice,dec;
 	char ch;
-	gettour();
 	consmap();
 	do
 	{
@@ -217,6 +216,7 @@ int main()
 					{
 						consgraph();//To build the adjacency matrix
 						cout<<"Enter station 1\n";
+						getline(cin,source);
 						getline(cin,source);
 						//cout<<source<<endl;
 						cout<<"Enter station 2\n";
