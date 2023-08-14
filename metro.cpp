@@ -21,6 +21,23 @@ ll N;// N is no of vertices M is edges
 string station[200];
 map <string,string> tourm;
 
+void gettour()
+{
+	ifstream fin;
+	string s1,s2;
+	fin.open("tourplace.txt",ios::in);
+	if(!fin)
+		cout<<"Not Found\n";
+	fin.seekg(0);
+	fin.clear();
+	while(!fin.eof())
+	{
+		getline(fin,s1);
+		getline(fin,s2);
+		tourm[s1]=s2;
+	}
+	fin.close();
+}
 //Given below code will print the path
 void disp(ll src,ll dest,ll par[])
 {
@@ -202,12 +219,13 @@ int main()
 	string source,destination;
 	ll i,x,y,w,src,dest,k,choice,dec;
 	char ch;
+	gettour();
 	consmap();
 	do
 	{
 		cout<<endl;
 		cout<<"1.To Route between two stations\n";
-		
+		cout<<"2.To check nearest metro station to a tourist place\n";
 		cin>>dec;
 		switch(dec)
 		{
@@ -238,6 +256,20 @@ int main()
 						cin>>ch;
 					}while(ch=='Y'||ch=='y');	
 					break;	
+			case 2:
+					do
+					{
+						string place;
+						cout<<"Enter a place\n";
+						getline(cin,place);
+						getline(cin,place);
+						string st;
+						st=tourm[place];
+						cout<<st<<endl;
+						cout<<"Do you wish to check for any other place\n";
+						cin>>ch;
+					}while(ch=='Y'||ch=='y');
+					break;
 			
 		}
 		cout<<"Do you wish to go back to main menu\n";
